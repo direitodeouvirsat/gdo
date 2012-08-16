@@ -44,6 +44,7 @@ Route::group(array('before' => 'auth'), function()
 
 		/*COLABORADOR*/
 		Route::get('colaborador', 'colaborador@index');
+		Route::get('colaborador/novo', 'colaborador@novo');
 		Route::post('colaborador', 'colaborador@novo');
 		Route::put('colaborador', 'colaborador@novo');
 		Route::delete('colaborador', 'colaborador@novo');
@@ -141,7 +142,7 @@ Route::filter('acesso', function()
 		{
 			foreach($acessos as $acesso)
 			{
-				if($controller == $acesso["controller"] and $request->method != 'GET')
+				if($controller == $acesso["controller"] and $request->method != 'GET' and isset($acesso[$request->method]))
 				{
 					if($acesso[$request->method] != 1)
 					{
